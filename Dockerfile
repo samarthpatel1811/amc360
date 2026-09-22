@@ -25,12 +25,21 @@ COPY backend/ /var/www/html/
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
-    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+# Production environment variables
+ENV APP_NAME="AMC360"
+ENV APP_ENV="production"
+ENV APP_DEBUG="false"
+ENV APP_KEY="base64:gbbYxCHr9F+vN2C9tNB2rlbjsMl6gtjC3fhADuQHyvU="
+ENV DB_CONNECTION="sqlite"
+ENV DB_DATABASE="/var/www/html/database/database.sqlite"
+ENV SESSION_DRIVER="file"
+ENV CACHE_STORE="file"
+ENV LOG_CHANNEL="stderr"
+ENV PORT="8000"
 
-RUN php artisan key:generate --force || true
+# Permissions
+RUN chmod -R 777 /var/www/html/database /var/www/html/storage /var/www/html/bootstrap/cache
 
-ENV PORT=8000
 EXPOSE 8000
 
-CMD sh -c "php artisan serve --host=0.0.0.0 --port=\${PORT:-8000}"
+CMD sh -c "php artisan config:clear && php artisan serve --host=0.0.0.0 --port=\${PORT:-8000}"

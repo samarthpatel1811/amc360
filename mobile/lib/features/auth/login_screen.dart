@@ -730,6 +730,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> with SingleTickerProv
                   runSpacing: 6,
                   children: [
                     ActionChip(
+                      avatar: const Icon(Icons.cloud_done_rounded, size: 14, color: AppTheme.primaryColor),
+                      label: const Text('☁️ Cloud 24/7 (Render)'),
+                      labelStyle: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+                      onPressed: () {
+                        controller.text = AppConfig.cloudApiUrl;
+                        setDialogState(() {
+                          testResult = null;
+                        });
+                      },
+                    ),
+                    ActionChip(
                       avatar: const Icon(Icons.wifi_rounded, size: 14),
                       label: const Text('Wi-Fi (10.20.57.32)'),
                       labelStyle: const TextStyle(fontSize: 11),

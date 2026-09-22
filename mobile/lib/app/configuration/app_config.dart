@@ -7,26 +7,29 @@ class AppConfig {
   static const String appVersion = 'v1.0.0';
 
   // Network environment presets
+  static const String cloudApiUrl = 'https://amc360.onrender.com/api/v1';
   static const String currentWifiUrl = 'http://10.20.57.32:8000/api/v1';
   static const String localhostUrl = 'http://127.0.0.1:8000/api/v1';
   static const String androidEmulatorUrl = 'http://10.0.2.2:8000/api/v1';
   static const String localWifiUrl = currentWifiUrl;
 
-  // Active API base URL (defaults to current host Wi-Fi IP)
-  static String apiBaseUrl = currentWifiUrl;
+  // Active API base URL (defaults to 24/7 permanent Cloud URL)
+  static String apiBaseUrl = cloudApiUrl;
 
   static Future<void> init() async {
     try {
       final prefs = await SharedPreferences.getInstance();
       final savedUrl = prefs.getString('api_base_url');
       if (savedUrl != null && savedUrl.isNotEmpty) {
-        // Guard: If saved URL is an expired trycloudflare.com tunnel, reset to active Wi-Fi
-        if (savedUrl.contains('est-studios-roads-investigator.trycloudflare.com')) {
-          apiBaseUrl = currentWifiUrl;
-          await prefs.setString('api_base_url', currentWifiUrl);
+        // Guard: If saved URL is an expired tunnel, reset to cloud URL
+        if (savedUrl.contains('trycloudflare.com')) {
+          apiBaseUrl = cloudApiUrl;
+          await prefs.setString('api_base_url', cloudApiUrl);
         } else {
           apiBaseUrl = savedUrl;
         }
+      } else {
+        apiBaseUrl = cloudApiUrl;
       }
     } catch (_) {}
   }
