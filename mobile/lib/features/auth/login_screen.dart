@@ -45,6 +45,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> with SingleTickerProv
       curve: Curves.easeInOutSine,
     );
 
+    _emailController.text = _adminEmail;
+    _passwordController.text = 'Secret@123';
+
     _loadAdminCredentials();
   }
 
@@ -55,6 +58,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> with SingleTickerProv
       if (savedEmail != null && savedEmail.isNotEmpty && mounted) {
         setState(() {
           _adminEmail = savedEmail;
+          if (_activeRole == 'admin') {
+            _emailController.text = savedEmail;
+          }
         });
       }
 
@@ -67,6 +73,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> with SingleTickerProv
           if (mounted) {
             setState(() {
               _adminEmail = email;
+              if (_activeRole == 'admin') {
+                _emailController.text = email;
+              }
             });
           }
         }
@@ -602,6 +611,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> with SingleTickerProv
                                     onPressed: _handleLogin,
                                     isLoading: authState.isLoading,
                                   ),
+                                  const SizedBox(height: AppSpacing.md),
+                                  _buildQuickCredentialsBar(isDark),
                                 ],
                               ),
                             ),
@@ -919,6 +930,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> with SingleTickerProv
         onTap: () {
           setState(() {
             _activeRole = role.toLowerCase();
+            if (_activeRole == 'technician') {
+              _emailController.text = 'tech@cooltech.com';
+              _passwordController.text = 'Secret@123';
+            } else if (_activeRole == 'customer') {
+              _emailController.text = 'customer@apex.com';
+              _passwordController.text = 'Secret@123';
+            } else {
+              _emailController.text = _adminEmail;
+              _passwordController.text = 'Secret@123';
+            }
           });
         },
         borderRadius: BorderRadius.circular(10),
@@ -967,6 +988,88 @@ class _LoginScreenState extends ConsumerState<LoginScreen> with SingleTickerProv
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildQuickCredentialsBar(bool isDark) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF1E293B).withAlpha(120) : const Color(0xFFF1F5F9),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: isDark ? Colors.white.withAlpha(12) : const Color(0xFFCBD5E1),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.key_rounded,
+                size: 13,
+                color: isDark ? const Color(0xFF94A3B8) : const Color(0xFF64748B),
+              ),
+              const SizedBox(width: 5),
+              Text(
+                '1-Tap Demo Switcher (Pass: Secret@123)',
+                style: GoogleFonts.inter(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                  color: isDark ? const Color(0xFF94A3B8) : const Color(0xFF64748B),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              _buildQuickFillChip('Admin', _adminEmail, 'admin', const Color(0xFF2563EB), isDark),
+              const SizedBox(width: 6),
+              _buildQuickFillChip('Technician', 'tech@cooltech.com', 'technician', const Color(0xFF0D9488), isDark),
+              const SizedBox(width: 6),
+              _buildQuickFillChip('Customer', 'customer@apex.com', 'customer', const Color(0xFF7C3AED), isDark),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuickFillChip(String label, String email, String role, Color color, bool isDark) {
+    final isSelected = _activeRole == role;
+    return Expanded(
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            _activeRole = role;
+            _emailController.text = email;
+            _passwordController.text = 'Secret@123';
+          });
+        },
+        borderRadius: BorderRadius.circular(8),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
+          decoration: BoxDecoration(
+            color: isSelected ? color : color.withAlpha(isDark ? 30 : 20),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: isSelected ? color : color.withAlpha(isDark ? 80 : 60),
+            ),
+          ),
+          child: Center(
+            child: Text(
+              label,
+              style: GoogleFonts.inter(
+                fontSize: 10.5,
+                fontWeight: FontWeight.w600,
+                color: isSelected ? Colors.white : (isDark ? Colors.white70 : color),
+              ),
+            ),
           ),
         ),
       ),
