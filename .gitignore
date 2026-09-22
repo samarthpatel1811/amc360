@@ -1,0 +1,35 @@
+# Ignore macOS metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Ignore large binaries
+backend/cloudflared
+backend/cloudflared.exe
+
+# Ignore backend vendor & node_modules
+backend/vendor/
+backend/node_modules/
+backend/storage/logs/*.log
+backend/storage/framework/sessions/*
+backend/storage/framework/views/*
+backend/storage/framework/cache/*
+!backend/storage/framework/cache/.gitignore
+!backend/storage/framework/sessions/.gitignore
+!backend/storage/framework/views/.gitignore
+
+# Ignore flutter build artifacts
+mobile/.dart_tool/
+mobile/build/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/ios/Pods/
+mobile/ios/.symlinks/
+mobile/ios/Flutter/Flutter.framework
+mobile/ios/Flutter/Flutter.podspec
+mobile/macos/Pods/
+mobile/macos/Flutter/ephemeral/
+
+# Ignore sensitive keys
+*serviceAccountKey*.json
+*firebase-adminsdk*.json

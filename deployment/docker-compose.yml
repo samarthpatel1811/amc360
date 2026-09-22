@@ -1,0 +1,101 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ../backend
+      dockerfile: ../deployment/Dockerfile
+    image: amc360/backend:v1.0.0
+    container_name: amc360_api
+    restart: unless-stopped
+    working_dir: /var/www/html
+    environment:
+      APP_NAME: AMC360
+      APP_ENV: production
+      APP_KEY: base64:3f5Z4jR5e9G2Q7v8L1w4x6y8Z0a2b4c6d8e0f2h4j6=
+      APP_DEBUG: "false"
+      APP_URL: http://localhost:8000
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: amc360
+      DB_USERNAME: amc_user
+      DB_PASSWORD: amc360_secret
+      CACHE_STORE: redis
+      QUEUE_CONNECTION: redis
+      SESSION_DRIVER: redis
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    volumes:
+      - ../backend:/var/www/html
+      - storage_data:/var/www/html/storage/app/public
+    networks:
+      - amc360_net
+    depends_on:
+      - db
+      - redis
+
+  webserver:
+    image: nginx:alpine
+    container_name: amc360_webserver
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ../backend:/var/www/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - storage_data:/var/www/html/storage/app/public:ro
+    networks:
+      - amc360_net
+    depends_on:
+      - app
+
+  db:
+    image: mariadb:10.11
+    container_name: amc360_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: amc360
+      MYSQL_USER: amc_user
+      MYSQL_PASSWORD: amc360_secret
+      MYSQL_ROOT_PASSWORD: amc_root_secret
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - amc360_net
+
+  redis:
+    image: redis:7-alpine
+    container_name: amc360_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - amc360_net
+
+  scheduler:
+    build:
+      context: ../backend
+      dockerfile: ../deployment/Dockerfile
+    container_name: amc360_scheduler
+    restart: unless-stopped
+    working_dir: /var/www/html
+    entrypoint: ["sh", "-c", "while true; do php artisan schedule:run --verbose --no-interaction; sleep 60; done"]
+    networks:
+      - amc360_net
+    depends_on:
+      - app
+      - db
+
+networks:
+  amc360_net:
+    driver: bridge
+
+volumes:
+  db_data:
+  redis_data:
+  storage_data:

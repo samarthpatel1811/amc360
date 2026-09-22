@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: amc360-api
+    env: docker
+    dockerfilePath: backend/Dockerfile.cloud
+    dockerContext: backend
+    plan: free
+    region: singapore
+    envVars:
+      - key: APP_NAME
+        value: AMC360
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: SESSION_DRIVER
+        value: file
+      - key: CACHE_STORE
+        value: file

@@ -1,0 +1,103 @@
+{
+  "users": [
+    {
+      "localId": "1",
+      "email": "samarthpanara12345@gmail.com",
+      "displayName": "Rajesh Mehta",
+      "phoneNumber": "+91 98765 43210",
+      "emailVerified": false,
+      "customAttributes": "{\"role\": \"admin\", \"company_id\": 1}",
+      "passwordHash": "$2y$10$e1tYGRUanu5ydoZ69VOn8uxZNIc6vadecbimmT/Ilo211Uzooa7ni"
+    },
+    {
+      "localId": "2",
+      "email": "rahul.tech@cooltech.com",
+      "displayName": "Rahul Sharma",
+      "phoneNumber": "+91 98765 11111",
+      "emailVerified": false,
+      "customAttributes": "{\"role\": \"technician\", \"company_id\": 1}",
+      "passwordHash": "$2y$12$ohmpaTK94olqHfFY2oGhvuKKui1FXsTf/y6wDbPXRWKzJ1CDhZAKa"
+    },
+    {
+      "localId": "3",
+      "email": "amit.tech@cooltech.com",
+      "displayName": "Amit Patel",
+      "phoneNumber": "+91 98765 22222",
+      "emailVerified": false,
+      "customAttributes": "{\"role\": \"technician\", \"company_id\": 1}",
+      "passwordHash": "$2y$12$mCIIcjb2JpQubXUMx2Y6Ze927peTg/7oeitfh6Irqg5CXrRsBpnzC"
+    },
+    {
+      "localId": "4",
+      "email": "vikas.tech@cooltech.com",
+      "displayName": "Vikas Kumar",
+      "phoneNumber": "+91 98765 33333",
+      "emailVerified": false,
+      "customAttributes": "{\"role\": \"technician\", \"company_id\": 1}",
+      "passwordHash": "$2y$12$raj3iADYft20BWNRbC5sGeQjMofIsUYCw6/jbd/85HFhV.lcWb652"
+    },
+    {
+      "localId": "5",
+      "email": "customer1@regency.com",
+      "displayName": "Mr. Vikram Singhania",
+      "phoneNumber": "+91 98250 11223",
+      "emailVerified": false,
+      "customAttributes": "{\"role\": \"customer\", \"company_id\": 1}",
+      "passwordHash": "$2y$12$7DH0wdI9rRFcVq5Wgql3QeAedADbLuno9gprPrdJib44JaBZQQ1s6"
+    },
+    {
+      "localId": "6",
+      "email": "customer2@apexhealth.com",
+      "displayName": "Dr. Ananya Iyer",
+      "phoneNumber": "+91 98250 22334",
+      "emailVerified": false,
+      "customAttributes": "{\"role\": \"customer\", \"company_id\": 1}",
+      "passwordHash": "$2y$12$xbWqeD7d95jZ9fMH7Khe6Omxzlpba83s2mLQqa8T9v67hqUCxT2uO"
+    },
+    {
+      "localId": "7",
+      "email": "customer3@innovatehub.com",
+      "displayName": "Kunal Joshi",
+      "phoneNumber": "+91 98250 33445",
+      "emailVerified": false,
+      "customAttributes": "{\"role\": \"customer\", \"company_id\": 1}",
+      "passwordHash": "$2y$12$7DH0wdI9rRFcVq5Wgql3QeAedADbLuno9gprPrdJib44JaBZQQ1s6"
+    },
+    {
+      "localId": "8",
+      "email": "customer4@shreejipharma.com",
+      "displayName": "Pradeep Kothari",
+      "phoneNumber": "+91 98250 44556",
+      "emailVerified": false,
+      "customAttributes": "{\"role\": \"customer\", \"company_id\": 1}",
+      "passwordHash": "$2y$12$7DH0wdI9rRFcVq5Wgql3QeAedADbLuno9gprPrdJib44JaBZQQ1s6"
+    },
+    {
+      "localId": "9",
+      "email": "customer5@emerald.com",
+      "displayName": "Sunita Rao",
+      "phoneNumber": "+91 98250 55667",
+      "emailVerified": false,
+      "customAttributes": "{\"role\": \"customer\", \"company_id\": 1}",
+      "passwordHash": "$2y$12$7DH0wdI9rRFcVq5Wgql3QeAedADbLuno9gprPrdJib44JaBZQQ1s6"
+    },
+    {
+      "localId": "10",
+      "email": "tech@cooltech.com",
+      "displayName": "Demo Technician",
+      "phoneNumber": "+91 98765 44444",
+      "emailVerified": false,
+      "customAttributes": "{\"role\": \"technician\", \"company_id\": 1}",
+      "passwordHash": "$2y$12$ttQDJOf9BRNZVWfhtKZfCOnpa6oF2qyqHu5JYwrivQak0DjfOZF1q"
+    },
+    {
+      "localId": "11",
+      "email": "customer@apex.com",
+      "displayName": "Dr. Ananya Iyer (Demo)",
+      "phoneNumber": "+91 98250 22334",
+      "emailVerified": false,
+      "customAttributes": "{\"role\": \"customer\", \"company_id\": 1}",
+      "passwordHash": "$2y$12$kjYUA2Ga8c/Dnj.KFDJ0ju.Rrydy5ZomnUGooURCVraMMMYA2Kug2"
+    }
+  ]
+}
